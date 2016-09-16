@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.newbiechen.commonviewdemo.MainActivity">
+
+   <!-- <com.newbiechen.commonviewdemo.view.CheckBoxView
+        android:id="@+id/checkbox_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <Button
+            android:id="@+id/uncheck"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="unCheck"/>
+        <Button
+            android:id="@+id/check"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="check"/>
+    </LinearLayout>-->
+    <com.newbiechen.commonviewdemo.view.ScaleRecView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:square_size="150dp"/>
+
+</LinearLayout>

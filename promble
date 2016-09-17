@@ -1,0 +1,22 @@
+1、弧度与角度的切换
+弧度 = (2*pi/360)*角度
+角度 = (360/2*pi)*弧度
+
+2、绘制流程：
+onMeasure()->onSizeChanged()->onLayout()->onDraw()
+
+3、一些操作
+drawPicture():Picture表示是一个录制器，创建之后并开启录制功能，可以获取一个画布，然后在画布上操作，完成后关闭录制器。
+这样你在画布上操作的流程就保存下来了。
+然后通过PictureDrawable或者View自带的Canvas，进行播放。
+PictureDrawable与Canvas的差别在于会不会缩放View
+
+4、四大操作(translate、rotate、scale、screw)
+共性：都有叠加性。之前对画布的操作都会叠加起来。
+scale：原理，实际上是对所画物体的缩放，不应该理解成对画布的缩放。（具体例子参考ScaleRecView）
+scale:对于数字的含义
+(-∞，-1]：对原点旋转，并放大N倍
+[-1,0)：对原点旋转，并缩小N倍
+0:表示不显示
+(0,1]:缩小N倍
+(1,+∞]:放大N倍

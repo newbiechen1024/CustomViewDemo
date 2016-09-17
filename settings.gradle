@@ -1,1 +1,1 @@
-include ':app', ':pieviewdemo', ':commonviewdemo'
+include ':app', ':pieviewdemo', ':commonviewdemo', ':leaflodingviewdemo'

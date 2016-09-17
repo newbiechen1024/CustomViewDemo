@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/CustomViewDemo.iml" filepath="$PROJECT_DIR$/CustomViewDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonviewdemo/commonviewdemo.iml" filepath="$PROJECT_DIR$/commonviewdemo/commonviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leaflodingviewdemo/leaflodingviewdemo.iml" filepath="$PROJECT_DIR$/leaflodingviewdemo/leaflodingviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/pieviewdemo/pieviewdemo.iml" filepath="$PROJECT_DIR$/pieviewdemo/pieviewdemo.iml" />
     </modules>
   </component>

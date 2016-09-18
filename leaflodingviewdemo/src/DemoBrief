@@ -20,6 +20,8 @@
 比如说：long time  和 float tolTime
 float fraction = time/tolTime; //返回的值是0而不是百分比
 
+回答：
+
 2、Random函数的 nextXxx(3)获得的数字范围是[0,2]还是[1,3]
 
 3、Matrix的使用，及其原理。（在LeafView中，我将画布的中心转换了，那么Matrix是否会叠加的问题）

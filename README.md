@@ -17,7 +17,7 @@
 
 作用：一些小练习
 
-详情参照[CommonView文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/commonviewdemo/DemoBrief)
+详情参照：[CommonView文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/commonviewdemo/DemoBrief)
 
 效果图一：ScaleRecView
 
@@ -26,3 +26,15 @@
 效果图二：CheckBoxView
 
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/commonviewdemo/src/showEffect/checkBoxView.gif)
+
+## LeafLoadingDemo
+
+作用：利用叶子飘动效果做的进度条
+
+详情参照：[LeafLoadding文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/leaflodingviewdemo/src/DemoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/LeafDemo_Show.gif)
+
+View参考地址：[Loading动画的实现](http://blog.csdn.net/tianjian4592/article/details/44538605)

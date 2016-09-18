@@ -39,3 +39,15 @@
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/LeafDemo_Show.gif)
 
 View参考地址：[Loading动画的实现](http://blog.csdn.net/tianjian4592/article/details/44538605)
+
+## RadarViewDemo
+
+作用：网状图（类似游戏中的属性图）
+
+详情参照：[RadarView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/radarviewdemo/src/DemoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/RadarViewDemo.png)
+
+View参考地址：[雷达图的制作](http://blog.csdn.net/crazy__chen/article/details/50163693)

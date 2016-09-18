@@ -1,4 +1,5 @@
-# CustomViewDemo
+# CustomViewDemo(模仿来源：[自定义View的实现](https://github.com/GcsSloop/AndroidNote))
+
 自定义View的练习
 
 参考的文章：[系统的学习自定义View](https://github.com/GcsSloop/AndroidNote)

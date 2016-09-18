@@ -4,11 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.TimerTask;
 
 /**
  * Created by PC on 2016/9/16.
@@ -28,7 +26,8 @@ public class LeafLoadingView extends View {
     private static final int WHITE_COLOR = 0xfffde399;
     // 橙色
     private static final int ORANGE_COLOR = 0xffffa800;
-
+    //由于无法适配分辨率，导致一些偏移量失准，所以需要修正
+    private static final int CORRECT_LOC = 10;
     // 用于控制绘制的进度条距离左／上／下的距离
     private static final int LEFT_MARGIN = 13;
     // 用于控制绘制的进度条距离右的距离
@@ -44,31 +43,43 @@ public class LeafLoadingView extends View {
     private static final long LEAF_FLOAT_TIME = 3000;
     // 叶子旋转一周需要的时间
     private static final long LEAF_ROTATE_TIME = 2000;
+    //风扇旋转一周需要的时间
+    private static final long FAN_ROTATE_TIME = 1000;
     //创建叶子的容器
     private final List<Leaf> mLeafList = new ArrayList<>();
 
     private final LeafFactory mLeafFactory = new LeafFactory();
+    //画笔
     private final Paint mProgressPaint = new Paint();
     private final Paint mBgPaint = new Paint();
-    private Bitmap mBitmapBackground;
-    private Bitmap mBitmapLeaf;
+    private final Paint mTextPaint = new Paint();
+    //图片
+    private Bitmap mBackgroundBitmap;
+    private Bitmap mLeafBitmap;
+    private Bitmap mFanBitmap;
+
     private Context mContext;
     //整个View的大小
     private int mViewWidth;
     private int mViewHeight;
+
     //图片的总尺寸
-    private int mBitmapBgWidth;
-    private int mBitmapBgHeight;
-    //半圆的半径
-    private int mBgRadius;
-    //当前进度
-    private int mCurrentProgress;
-    //进度条的尺寸
-    private int mProgressWidth;
-    private int mProgressHeight;
+    private int mBgWidth;
+    private int mBgHeight;
     //叶子图片的大小
     private int mLeafWidth;
     private int mLeafHeight;
+    //风扇的图片大小
+    private int mFanWidth;
+    private int mFanHeight;
+
+    //半圆的半径
+    private int mBgRadius;
+    //当前进度
+    private int mCurrentProgress = 0;
+    //进度条的尺寸
+    private int mProgressWidth;
+    private int mProgressHeight;
 
     // 中等振幅大小
     private int mMiddleAmplitude = MIDDLE_AMPLITUDE;
@@ -78,18 +89,10 @@ public class LeafLoadingView extends View {
     private long mLeafFloatTime = LEAF_FLOAT_TIME;
     //叶子旋转一圈用的时间
     private long mLeafRotateTime = LEAF_ROTATE_TIME;
-
-   /* private Handler mHandler = new Handler(){
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(mCurrentProgress < 100){
-                invalidate();
-                sendEmptyMessageDelayed(0,200);
-            }
-        }
-    };*/
+    //风扇旋转一圈用的事件
+    private long mFanRotateTime = FAN_ROTATE_TIME;
+    //判断是否View已经开始绘制
+    private boolean isStartDraw = false;
 
     public LeafLoadingView(Context context) {
         this(context,null);
@@ -121,6 +124,11 @@ public class LeafLoadingView extends View {
         mBgPaint.setAntiAlias(true);
         mBgPaint.setStyle(Paint.Style.FILL);
         mBgPaint.setColor(WHITE_COLOR);
+        //设置显示百分比文字的画笔
+        mTextPaint.setColor(Color.WHITE);
+        mTextPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mTextPaint.setTextSize(30);
+        mTextPaint.setStrokeWidth(1);
 
         initBitmap();
         mLeafList.addAll(mLeafFactory.generateLeaves());
@@ -130,37 +138,50 @@ public class LeafLoadingView extends View {
      * 初始化背景框
      */
     private void initBitmap(){
-        mBitmapBackground = BitmapFactory.decodeResource(getResources(),R.mipmap.leaf_kuang);
+        mBackgroundBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.leaf_kuang);
         //边框的总高度和宽度
-        mBitmapBgWidth = mBitmapBackground.getWidth();
-        mBitmapBgHeight = mBitmapBackground.getHeight();
+        mBgWidth = mBackgroundBitmap.getWidth();
+        mBgHeight = mBackgroundBitmap.getHeight();
         //内部半圆的半径
-        mBgRadius = (mBitmapBgHeight -2 * LEFT_MARGIN)/2;
+        mBgRadius = (mBgHeight -2 * LEFT_MARGIN)/2;
         //内部区域的总宽度
-        mProgressWidth = mBitmapBgWidth - LEFT_MARGIN - RIGHT_MARGIN;
-        mProgressHeight = mBitmapBgHeight - LEFT_MARGIN * 2;
+        mProgressWidth = mBgWidth - LEFT_MARGIN - RIGHT_MARGIN;
+        mProgressHeight = mBgHeight - LEFT_MARGIN * 2;
 
         //设置叶子的图片
-        mBitmapLeaf = BitmapFactory.decodeResource(getResources(),R.mipmap.leaf);
-        mLeafWidth = mBitmapLeaf.getWidth();
-        mLeafHeight = mBitmapLeaf.getHeight();
+        mLeafBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.leaf);
+        mLeafWidth = mLeafBitmap.getWidth();
+        mLeafHeight = mLeafBitmap.getHeight();
+
+        //设置风扇的图片
+        mFanBitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.fengshan);
+        mFanWidth = mFanBitmap.getWidth();
+        mFanHeight = mFanBitmap.getHeight();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //将画布移到绘制中心
-        int px = (mViewWidth - mBitmapBgWidth)/2;
-        int py = (mViewHeight - mBitmapBgHeight)/2;
+        int px = (mViewWidth - mBgWidth)/2;
+        int py = (mViewHeight - mBgHeight)/2;
         canvas.translate(px,py);
-        /**开始进度条*/
+        /**开始绘制进度条*/
         drawProgress(canvas);
         /****开始绘制背景**********/
-        drawBackground(canvas);
-
-        //当完成时停止重绘
-        if (mCurrentProgress > 0 && mCurrentProgress <= 100){
+        //绘制背景框
+        canvas.drawBitmap(mBackgroundBitmap,0,0,null);
+        //判断是否完成，完成则停止绘制
+        if (mCurrentProgress > 0 && mCurrentProgress < 100){
+            /**开始绘制风扇*/
+            drawFan(canvas);
             postInvalidate();
+        }
+        else {
+            //风扇停止旋转
+            float fanX = LEFT_MARGIN + mProgressWidth - RIGHT_MARGIN - 58;
+            float fanY = LEFT_MARGIN;
+            canvas.drawBitmap(mFanBitmap,fanX,fanY,null);
         }
 
     }
@@ -170,6 +191,8 @@ public class LeafLoadingView extends View {
      * @param canvas
      */
     private void drawProgress(Canvas canvas){
+        //存储画布。
+        canvas.save();
         //首先移动到绘制区（移动到边框内）,根据叠加性
         canvas.translate(LEFT_MARGIN,LEFT_MARGIN);
         //获取当前进度的百分比
@@ -196,6 +219,10 @@ public class LeafLoadingView extends View {
             //绘制矩形
             drawRectProgress(canvas,rectF,currentWidth);
         }
+
+        /**************绘制进度条的具体数字***************/
+        canvas.drawText(mCurrentProgress+"%",mProgressWidth/2-RIGHT_MARGIN,mProgressHeight/2+CORRECT_LOC,mTextPaint);
+        canvas.restore();
     }
 
     /**
@@ -230,6 +257,10 @@ public class LeafLoadingView extends View {
         }
     }
 
+    /**
+     * 绘制叶子
+     * @param canvas
+     */
     private void drawLeaves(Canvas canvas){
         Iterator<Leaf> leafIterator = mLeafList.iterator();
         //首先获取叶子，并判断是否能够绘制
@@ -249,7 +280,7 @@ public class LeafLoadingView extends View {
                 Matrix matrix = new Matrix();
                 matrix.postTranslate(leaf.x,leaf.y);
                 matrix.postRotate(rotateAngle,leaf.x+mLeafWidth/2,leaf.y+mLeafHeight/2);
-                canvas.drawBitmap(mBitmapLeaf,matrix,null);
+                canvas.drawBitmap(mLeafBitmap,matrix,null);
                 canvas.restore();
             }
         }
@@ -295,7 +326,10 @@ public class LeafLoadingView extends View {
         //设置w参数
         double w = 2 * Math.PI / mProgressWidth;
         //根据公式y = A*Sin(w*x + α)+h 获取Y值
-        return (float) (amplitude * Math.sin(w * leaf.x)+mBgRadius);
+        double y = amplitude * Math.sin(w * leaf.x)+mBgRadius;
+        //让Y的位置控制在框的范围内。原理：根据坐标位置和Sin的原点位置得出Y的活动范围。
+        //问题：无法与其他分辨率的手机兼容。
+        return (float) (Math.max(-LEFT_MARGIN+CORRECT_LOC,Math.min(mBgRadius+LEFT_MARGIN+CORRECT_LOC,y))) ;
     }
 
     /**
@@ -312,13 +346,27 @@ public class LeafLoadingView extends View {
         return rotateAngle;
     }
 
-    //设置背景边框
-    private void drawBackground(Canvas canvas){
-        //将从内部绘制区域，转移到中心点
-        canvas.translate(-LEFT_MARGIN,-LEFT_MARGIN);
-        //绘制背景框
-        canvas.drawBitmap(mBitmapBackground,0,0,null);
+    /**
+     * 绘制风扇
+     * @param canvas
+     */
+    private void drawFan(Canvas canvas){
+        //获取百分比
+        long currentSysTime = System.currentTimeMillis();
+        long intervalTime = currentSysTime % mFanRotateTime;
+        float fraction = (float) intervalTime/mFanRotateTime;
+        //设定旋转角
+        int angle = (int) (360 * fraction);
+        //设置图片显示的位置，58为修正位置的系数（用图片真不好- -，都要修正系数）
+        float px = LEFT_MARGIN + mProgressWidth - RIGHT_MARGIN - 58;
+        float py = LEFT_MARGIN;
+        Matrix matrix = new Matrix();
+        matrix.postTranslate(px,py);
+        matrix.postRotate(-angle,px+mFanWidth/2,py+mFanHeight/2);
+
+        canvas.drawBitmap(mFanBitmap,matrix,null);
     }
+
     /**
      * 叶子类
      * */
@@ -336,7 +384,9 @@ public class LeafLoadingView extends View {
 
     }
 
-    //绘制的幅度
+    /**
+     * 振幅枚举类
+     */
     public enum StartType{
         LITTLE,MIDDLE,HIGH
     }
@@ -387,28 +437,56 @@ public class LeafLoadingView extends View {
      * @param currentProgress
      */
     public void setProgress(int currentProgress){
-        if (currentProgress > 100){
-            mCurrentProgress = 100;
+        if (currentProgress <= 100){
+            mCurrentProgress = currentProgress;
         }
         else {
-            mCurrentProgress = currentProgress;
-            postInvalidate();
+            mCurrentProgress = 100;
+        }
+        //启动绘制，因为内部已经有绘制，setProgress()只要开启一次就可以了
+        if (isStartDraw == false){
+            invalidate();
+            isStartDraw = true;
         }
     }
 
+    /**
+     * 设置叶子飘动的时间
+     * @param leafFloatTime
+     */
     public void setLeafFloatTime(long leafFloatTime){
         mLeafFloatTime = leafFloatTime;
     }
 
+    /**
+     * 设置叶子旋转一圈的时间
+     * @param leafRotateTime
+     */
     public void setLeafRotateTime(long leafRotateTime){
         mLeafRotateTime = leafRotateTime;
     }
 
+    /**
+     * 设置振幅
+     * @param middleAmplitude
+     */
     public void setMiddleAmplitude(int middleAmplitude){
         mMiddleAmplitude = middleAmplitude;
     }
 
+    /**
+     * 设置振幅差
+     * @param amplitudeDisparity
+     */
     public void setAmplitudeDisparity(int amplitudeDisparity){
         mAmplitudeDisparity = amplitudeDisparity;
+    }
+
+    /**
+     * 设置风扇转动一圈的时间
+     * @param fanRotateTime
+     */
+    public void setFanRotateTime(int fanRotateTime){
+        mFanRotateTime = fanRotateTime;
     }
 }

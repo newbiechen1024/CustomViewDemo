@@ -1,1 +1,1 @@
-include ':app', ':pieviewdemo', ':commonviewdemo', ':leaflodingviewdemo', ':radarviewdemo'
+include ':app', ':pieviewdemo', ':commonviewdemo', ':leaflodingviewdemo', ':radarviewdemo', ':bazierquad'

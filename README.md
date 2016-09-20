@@ -51,3 +51,25 @@ View参考地址：[Loading动画的实现](http://blog.csdn.net/tianjian4592/ar
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/RadarViewDemo.png)
 
 View参考地址：[雷达图的制作](http://blog.csdn.net/crazy__chen/article/details/50163693)
+
+##  BezierQuadView
+
+作用： 使用二阶贝塞尔曲线。
+
+详情参照：[BezierQuadView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/bazierquad/src/demoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/bezierQuadView.gif)
+
+## BezierLoveView
+
+作用： 如何使用三阶贝塞尔曲线，制作爱心。
+
+详情参照：[BezierLoveView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/bazierloveviewdemo/src/demoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/BezierLoveView.gif)
+
+

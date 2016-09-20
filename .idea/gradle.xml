@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/bazierloveviewdemo" />
             <option value="$PROJECT_DIR$/bazierquad" />
             <option value="$PROJECT_DIR$/commonviewdemo" />
             <option value="$PROJECT_DIR$/leaflodingviewdemo" />
@@ -20,6 +21,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/bazierloveviewdemo" />
             <option value="$PROJECT_DIR$/bazierquad" />
             <option value="$PROJECT_DIR$/commonviewdemo" />
             <option value="$PROJECT_DIR$/leaflodingviewdemo" />

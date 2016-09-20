@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.newbiechen.bazierloveviewdemo.MainActivity">
+
+    <com.newbiechen.bazierloveviewdemo.BazierLoveView
+        android:id="@+id/main_bazierLove"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <RadioGroup
+        android:id="@+id/main_rg_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/main_rb_select_true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="显示"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/main_rb_select_false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="消失"/>
+    </RadioGroup>
+    <Button
+        android:id="@+id/main_btn_restart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restart"
+        android:textSize="18sp"/>
+</LinearLayout>

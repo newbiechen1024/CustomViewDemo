@@ -200,28 +200,19 @@ public class BazierLoveView extends View {
     private void drawBazierCurve(Canvas canvas){
         //这里其实也可以使用for循环
         mBaizerPath.moveTo(mLeftStartPoint.x,mLeftStartPoint.y);
+
         mBaizerPath.cubicTo(mLTLeftControlPoint.x,mLTLeftControlPoint.y,
                 mLTTopControlPoint.x,mLTTopControlPoint.y,mTopStartPoint.x,mTopStartPoint.y);
-        canvas.drawPath(mBaizerPath,mBazierPaint);
-        mBaizerPath.reset();
 
-        mBaizerPath.moveTo(mTopStartPoint.x,mTopStartPoint.y);
         mBaizerPath.cubicTo(mRTTopControlPoint.x,mRTTopControlPoint.y,
                 mRTRightControlPoint.x,mRTRightControlPoint.y,mRightStartPoint.x,mRightStartPoint.y);
-        canvas.drawPath(mBaizerPath,mBazierPaint);
-        mBaizerPath.reset();
 
-        mBaizerPath.moveTo(mRightStartPoint.x,mRightStartPoint.y);
         mBaizerPath.cubicTo(mRBRightControlPoint.x,mRBRightControlPoint.y,
                 mRBBelowControlPoint.x,mRBBelowControlPoint.y,mBelowStartPoint.x,mBelowStartPoint.y);
-        canvas.drawPath(mBaizerPath,mBazierPaint);
-        mBaizerPath.reset();
 
-        mBaizerPath.moveTo(mBelowStartPoint.x,mBelowStartPoint.y);
         mBaizerPath.cubicTo(mLBBelowControlPoint.x,mLBBelowControlPoint.y,mLBLeftControlPoint.x,
                 mLBLeftControlPoint.y,mLeftStartPoint.x,mLeftStartPoint.y);
         canvas.drawPath(mBaizerPath,mBazierPaint);
-        mBaizerPath.reset();
     }
 
 

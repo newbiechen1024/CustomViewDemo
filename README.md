@@ -72,4 +72,14 @@ View参考地址：[雷达图的制作](http://blog.csdn.net/crazy__chen/article
 
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/BezierLoveView.gif)
 
+## DevinShineView
 
+作用：利用三阶贝塞尔曲线制作圆的弹性效果 
+
+详情参照：[DevinShineView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/devinshineviewdemo/src/DemoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/DevinShineView.gif)
+
+View参考地址：[模仿网页设计的圆](https://github.com/DevinShine/MagicCircle)

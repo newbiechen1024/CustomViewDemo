@@ -88,7 +88,7 @@ View参考地址：[模仿网页设计的圆](https://github.com/DevinShine/Magi
 
 作用：纸飞机的加载效果
 
-详情参照：[DevinShineView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/planeloadingviewdemo/src/DemoBrief)
+详情参照：[PlaneLoadingView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/planeloadingviewdemo/src/DemoBrief)
 
 效果图：
 

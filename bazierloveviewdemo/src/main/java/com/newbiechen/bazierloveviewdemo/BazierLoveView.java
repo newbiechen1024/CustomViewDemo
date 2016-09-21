@@ -213,6 +213,7 @@ public class BazierLoveView extends View {
         mBaizerPath.cubicTo(mLBBelowControlPoint.x,mLBBelowControlPoint.y,mLBLeftControlPoint.x,
                 mLBLeftControlPoint.y,mLeftStartPoint.x,mLeftStartPoint.y);
         canvas.drawPath(mBaizerPath,mBazierPaint);
+        mBaizerPath.reset();
     }
 
 

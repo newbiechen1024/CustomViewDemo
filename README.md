@@ -83,3 +83,13 @@ View参考地址：[雷达图的制作](http://blog.csdn.net/crazy__chen/article
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/DevinShineView.gif)
 
 View参考地址：[模仿网页设计的圆](https://github.com/DevinShine/MagicCircle)
+
+## PlaneLoadingView
+
+作用：纸飞机的加载效果
+
+详情参照：[DevinShineView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/planeloadingviewdemo/src/DemoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/PlaneLoadingView.gif)

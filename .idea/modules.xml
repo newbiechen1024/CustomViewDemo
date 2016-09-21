@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/devinshineviewdemo/devinshineviewdemo.iml" filepath="$PROJECT_DIR$/devinshineviewdemo/devinshineviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/leaflodingviewdemo/leaflodingviewdemo.iml" filepath="$PROJECT_DIR$/leaflodingviewdemo/leaflodingviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/pieviewdemo/pieviewdemo.iml" filepath="$PROJECT_DIR$/pieviewdemo/pieviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/planeloadingviewdemo/planeloadingviewdemo.iml" filepath="$PROJECT_DIR$/planeloadingviewdemo/planeloadingviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/radarviewdemo/radarviewdemo.iml" filepath="$PROJECT_DIR$/radarviewdemo/radarviewdemo.iml" />
     </modules>
   </component>

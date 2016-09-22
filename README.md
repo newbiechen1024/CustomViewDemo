@@ -93,3 +93,13 @@ View参考地址：[模仿网页设计的圆](https://github.com/DevinShine/Magi
 效果图：
 
 ![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/PlaneLoadingView.gif)
+
+## SearchView
+
+作用：搜索并加载的效果
+
+详情参照：[SearchView介绍文档](https://github.com/newbiechen1024/CustomViewDemo/blob/master/searchview/src/DemoBrief)
+
+效果图：
+
+![](https://github.com/newbiechen1024/CustomViewDemo/blob/master/showEffect/SearchView.gif)

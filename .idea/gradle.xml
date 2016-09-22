@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/pieviewdemo" />
             <option value="$PROJECT_DIR$/planeloadingviewdemo" />
             <option value="$PROJECT_DIR$/radarviewdemo" />
+            <option value="$PROJECT_DIR$/searchview" />
           </set>
         </option>
         <option name="myModules">
@@ -31,6 +32,7 @@
             <option value="$PROJECT_DIR$/pieviewdemo" />
             <option value="$PROJECT_DIR$/planeloadingviewdemo" />
             <option value="$PROJECT_DIR$/radarviewdemo" />
+            <option value="$PROJECT_DIR$/searchview" />
           </set>
         </option>
       </GradleProjectSettings>

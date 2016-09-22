@@ -1,0 +1,48 @@
+一、项目简介
+具有特效的搜索控件
+
+二、制作流程
+1、分别用Path创建放大镜和外围的圈（使用addArc不要使用addCircle）
+2、增加点击事件，让放大镜消失。（表示点击搜索）
+（如何让放大镜消失：利用Animation动画，判定当前时间下的长度值，然后利用PathMeasure
+截取放大镜的长度）
+3、当搜索消失的时候，先让外围的圈以点的形式出现并旋转。
+（如何让圆环的环绕曲线先变大后缩小：假设曲线是在135度(周长的3/8)处变到最大，
+并且最大值是90度所对应的弧度(周长的1/4)，所以就Animation当前的长度值与3/8对比得到的百分比
+乘以1/4的周长值，这样就能放大，缩小的原理相似）
+4、搜索完成后，展现放大镜的图。
+(问题：如何当加载完成的时候，衔接上放大镜动画：完成Loading时候将loading动画设为repeat=0
+结束动画，并且判断loading结束的时候，开启结束动画)
+
+
+三、问题
+1、硬件加速器导致getSegment的问题
+    Path relPath = new Path();
+    PathMeasure measure = new PathMeasure();
+    measure.setPath(mSearchPath,false);
+    measure.getSegment(0,measure.getLength(),relPath,true);
+    canvas.drawPath(relPath,mSearchPaint);
+//如果在安卓4.4或者之前的版本，在默认开启硬件加速的情况下，更改 dst 的内容后可能绘制会出现问题(获取不到截取的图形)，
+请关闭硬件加速或者给 dst 添加一个单个操作，例如: dst.rLineTo(0, 0)
+
+2、圆圈与圆环
+当我们需要圆环的时候一般都是
+Paint paint = new Paint();
+paint.setStyle(Paint.Style.STROKE);//显示边框
+Path path = new Path();
+//在Path中绘制圆圈
+mSearchPath.addCircle(0,0,SMALL_CIRCLE_RADIUS, Path.Direction.CW);
+//在圆圈后添加一条线
+mSearchPath.rLineTo(LINE_LEN,0);
+//最后绘制的时候，圆圈就变成了圆环。
+但是其实path中它还是圆圈，只是绘制的时候化成了圆环。
+所以之后调用
+PathMeasure measure = new PathMeasure();
+measure.setPath(mSearchPath,false);
+measure.getLength()//获取Path的长度
+的时候，会发现，长度只表示的是圆圈的周长，在圆后面添加的直线(rLineTo())全都不算在长度中了。
+
+所以如果想使用圆环，那么最好用path.drawArc(rect,0,359.9f)代替。
+// 注意,不要到360度,否则内部会自动优化,测量不能取到需要的数值
+
+
